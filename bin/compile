@@ -50,6 +50,8 @@ echo "-----> Checking for Mercurial and Bazaar"
     pip install --use-mirrors bzr
 ) 2>&1 | sed -u 's/^/       /'
 
+. $venv/bin/activate
+
 echo "-----> Using latest Go source"
 
 (
