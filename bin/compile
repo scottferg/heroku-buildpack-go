@@ -35,7 +35,6 @@ fi
 echo "-----> Checking for Mercurial and Bazaar"
 (
     set -e
-    which hg && which bzr && exit
     echo "Installing Mercurial and Bazaar"
 
     virtualenv --python $python --distribute --never-download --prompt='(venv) ' $venv
