@@ -37,7 +37,7 @@ fi
 echo "-----> Checking for Mercurial and Bazaar"
 (
     set -e
-    which hg && which bzr
+    which hg && which bzr && exit
     echo "Installing Mercurial and Bazaar"
 
     virtualenv --python $python --distribute --never-download --prompt='(venv) ' $venv
@@ -51,6 +51,8 @@ echo "-----> Checking for Mercurial and Bazaar"
     pip install --use-mirrors mercurial
     pip install --use-mirrors bzr
 ) 2>&1 | sed -u 's/^/       /'
+
+source $venv/bin/activate
 
 echo "-----> Using Go $ver"
 
