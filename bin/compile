@@ -6,7 +6,9 @@ set -e
 mkdir -p "$1" "$2"
 build=$(cd "$1/" && pwd)
 cache=$(cd "$2/" && pwd)
-url=https://code.google.com/p/go/
+ver=go1
+file=go.$ver.linux-amd64.tar.gz
+url=http://go.googlecode.com/files/$file
 buildpack=$(dirname $(dirname $0))
 
 # Python
@@ -35,6 +37,7 @@ fi
 echo "-----> Checking for Mercurial and Bazaar"
 (
     set -e
+    which hg && which bzr
     echo "Installing Mercurial and Bazaar"
 
     virtualenv --python $python --distribute --never-download --prompt='(venv) ' $venv
@@ -49,9 +52,7 @@ echo "-----> Checking for Mercurial and Bazaar"
     pip install --use-mirrors bzr
 ) 2>&1 | sed -u 's/^/       /'
 
-. $venv/bin/activate
-
-echo "-----> Using latest Go source"
+echo "-----> Using Go $ver"
 
 (
     set -e
