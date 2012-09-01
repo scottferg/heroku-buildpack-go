@@ -50,7 +50,11 @@ echo "-----> Using Go $ver"
     tar zxf $file
     rm -f $file
 
-    ./go/src/all.bash
+    cd go/src
+
+    ./all.bash
+
+    cd ../..
 )
 
 GOROOT=$cache/go-$ver/go export GOROOT
