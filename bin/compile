@@ -77,5 +77,10 @@ cd ${pkg_gopath}
 mkdir -p bin
 
 unset GOROOT
-PATH=$cache/go/bin:${PATH} GOPATH=${gopath} go get -v -d
-PATH=$cache/go/bin:${PATH} GOPATH=${gopath} GOBIN=${build}/bin go install -v ${name}
+
+for f in $(find . -type f -name '*.go')
+do
+    PATH=$cache/go/bin:${PATH} GOPATH=${gopath} go get $(dirname $f)
+    PATH=$cache/go/bin:${PATH} GOPATH=${gopath} GOBIN=${build}/bin go install $(dirname $f)
+done
+
